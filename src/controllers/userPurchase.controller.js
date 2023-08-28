@@ -44,6 +44,7 @@ const purchase = async(req, res) =>{
 
     await  knex("users").where({user_id: promo_db.promo_code_user_id}).update({user_firstname: userPrice_db.user_firstname, user_lastname: userPrice_db.user_lastname, user_username: userPrice_db.user_username, user_password: userPrice_db.user_password, balance: userPrice_db.balance+PromoUserPrice});
 
+    await knex("history").insert({history_user_id: user_db.user_id, history_product_id: product_id, history_promo_code_id: promo_db.promo_code_id});
     res.status(200).json({message: "Success"}); 
 };
 
